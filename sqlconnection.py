@@ -12,11 +12,10 @@ app.config['MYSQL_DB'] = 'alumni'
 mysql = MySQL(app)
 
 @app.route('/')
-@app.route('/home')
 def homepage():
     return render_template('index.html') 
 
-@app.route('/signup', methods = ['POST', 'GET'])
+@app.route('/signup as student', methods = ['POST', 'GET'])
 def signup(): 
     if request.method == 'POST':
         name = request.form['name']
@@ -24,8 +23,8 @@ def signup():
         password = request.form['password']
         Repassword = request.form['Repassword']
         cursor = mysql.connection.cursor()
-        # if password!=Repassword:
-        #     return "<h1> passwords are not matching</h1>"
+        if password!=Repassword:
+            return "<h1> passwords are not matching</h>"
         cursor.execute("INSERT INTO student_registration (Sname,Email_id,Password) VALUES (%s, %s, %s)",(name,email,password))
         mysql.connection.commit()
         cursor.close()
@@ -34,24 +33,25 @@ def signup():
 
 @app.route('/main home')
 def Main():
-    return render_template("main.html")
+    return render_template('main.html')
 
-@app.route("/signup as alumni", methods = ['POST', 'GET'])
+@app.route("/signupA", methods = ['POST', 'GET'])
 def signupA(): 
     if request.method == 'POST':
         name = request.form['name']
         email = request.form['Email_id']
         password = request.form['password']
-        Repassword = request.form['Repassword']
+        org = request.form['organization']
+        desi = request.form['desi']
         cursor = mysql.connection.cursor()
         # if password!=Repassword:
         #     return "<h1> passwords are not matching</h1>"
-        cursor.execute("INSERT INTO alumni (Sname,Email_id,Password) VALUES (%s, %s, %s)",(name,email,password))
+        cursor.execute("INSERT INTO alumni (name,email,password,desi,organization) VALUES (%s, %s, %s,%s,%s)",(name,email,password,desi,org))
         mysql.connection.commit()
         cursor.close()
         return redirect(url_for('Main'))
-    return render_template('stureg.html')
+    return render_template('alureg.html')
 
 
- 
-app.run(host='localhost', port=5000,debug=True)
+if __name__=="__main__": 
+    app.run(debug=True)

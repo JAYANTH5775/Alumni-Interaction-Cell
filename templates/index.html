@@ -54,9 +54,8 @@
   </main>
   <footer>
     <!-- place footer here -->
-    <button type="button" class="btn btn-secondary btn-lg btn-block" class="btn-group-vertical"   style="display: table-cell; vertical-align: middle"  onclick="location.href='stureg.html';">Student-Login</button>
-    <button type="button" class="btn btn-secondary btn-lg btn-block" class="btn-group-vertical"   style="display: table-cell; vertical-align: middle"  onclick="location.href='alureg.html';">Alumni-Login</button>
-
+    <div> <a href="{{url_for('signup')}}">Student registration</a></div>
+    <div> <a href="{{url_for('signupA')}}">Alumni registration</a></div>
 <button type="button" class="btn-primary btn-lg btn-block"   style="background-color:brown" style="display: flex; align-items: center" style="display: table-cell; vertical-align: middle" onclick="location.href='main.html';">As Guest</button>
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
